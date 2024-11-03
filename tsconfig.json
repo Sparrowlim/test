@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    // TypeScript를 JavaScript로 컴파일 할 때 사용하는 옵션
+    "target": "es5", // 컴파일된 JavaScript 코드가 어떤 버전의 ECMAScript에서 실행될지 결정(ES5이기 때문에 ES6의 화살표 함수는 function으로 변환됨)
+    "lib": ["dom", "dom.iterable", "ESNext"], // lib 옵션은 컴파일러가 코드에서 사용할 수 있는 라이브러리의 목록을 지정
+    "allowJs": true, // 타입스크립트 파일(*.ts)뿐만 아니라 자바스크립트 파일(*.js)도 컴파일
+    "skipLibCheck": true, // 라이브러리 파일(*.d.ts)을 체크하지 않음 -> 컴파일 속도 향상
+    "strict": true, // 타입 체크를 엄격하게 하는 옵션(런타임에 오류가 발생할 수 있는 코드를 컴파일 시에 오류로 표시(alwaysStrict, strictNullChecks, strictBindCallApply, strictFunctionTypes, strictPropertyInitialization, noImplicitAny, noImplicitThis, useUnknownInCatchVariables 를 true로 설정한 것과 같음)
+    "forceConsistentCasingInFileNames": true, // 파일 이름의 대소문자를 일관되게 사용하도록 강제
+    "noEmit": true, // 컴파일된 파일을 생성하지 않음 -> Next.js에서는 swc를 사용하여 컴파일
+    "esModuleInterop": true, // CommonJS 모듈을 ES6 모듈로 변환
+    "module": "esnext", // 모듈 시스템 설정. 대표적으로 CommonJS, esnext 등이 있음 -> CommonJS: require, esnext: import 사용 가능
+    "moduleResolution": "node", // 모듈 해석 방식 설정 -> node: Node는 node_modules기준으로 모듈 해석, classic: tsconfig.json 파일이 있는 디렉토리를 기준으로 모듈 해석
+    "resolveJsonModule": true, // JSON 파일을 import 구문으로 불러올 수 있게 해줌
+    "isolatedModules": true, // 모두 모듈로 취급. 타입스크립트 컴파일러는 파일에 import 또는 export가 없는 경우, 파일을 모듈로 간주하지 않음. 다른 모듈 시스템과 연계되지 않고 단독으로 있는 파일의 생성을 막기 위한 옵션
+    "jsx": "preserve", // JSX 코드를 어떻게 컴파일할지 결정 -> preserve: JSX 코드를 그대로 둠, react: JSX 코드를 React.createElement로 변환 -> swc가 변환 작업을 수행하기 때문에 preserve로 설정
+    "incremental": true, // 타입스크립트 마지막 컴파일 정보를 .tsbuildinfo 파일 형태로 만들어 디스크에 저장하여 다음 컴파일 시간을 단축
+    "baseUrl": "src", // 모듈을 해석할 때 기준이 되는 디렉토리
+    "paths": {
+      // @사용은 자제해야 함 스코프 패키지에 널리 사용되는 이름이기 때문
+      "#pages/*": ["pages/*"], //
+      "#hooks/*": ["hooks/*"],
+      "#types/*": ["types/*"],
+      "#components/*": ["components/*"],
+      "#utils/*": ["utils/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"], // 컴파일할 파일 목록
+  "exclude": ["node_modules"] // 컴파일에서 제외할 파일 목록
+}
